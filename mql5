@@ -1,0 +1,108 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                                Inside Candle EA |
+//|                                      Developer's site: forexroboteasy.com |
+//|                                             Developed by: Forex Robot Easy Team |
+//+------------------------------------------------------------------+
+
+// Constants
+#define TAKE_PROFIT 50   // Take profit level in pips
+#define STOP_LOSS 50     // Stop loss level in pips
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Enable trade execution
+    if (!TradeAllowed())
+    {
+        Print('Trading is not allowed on this account.');
+        return INIT_FAILED;
+    }
+
+    // Set the take profit and stop loss levels
+    SetTakeProfit(TAKE_PROFIT);
+    SetStopLoss(STOP_LOSS);
+
+    return INIT_SUCCEEDED;
+}
+
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    // Perform any necessary cleanup
+}
+
+//+------------------------------------------------------------------+
+//| Expert start function                                            |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Check if an inside candle pattern exists
+    if (IsInsideCandle())
+    {
+        // Get the breakout direction
+        ENUM_DIRECTION direction = GetBreakoutDirection();
+
+        // Place a trade based on the breakout direction
+        if (direction == DIRECTION_UP)
+        {
+            BuyOrder();
+        }
+        else if (direction == DIRECTION_DOWN)
+        {
+            SellOrder();
+        }
+    }
+}
+
+//+------------------------------------------------------------------+
+//| Check if an inside candle pattern exists                          |
+//+------------------------------------------------------------------+
+bool IsInsideCandle()
+{
+    // Implementation to detect an inside candle pattern
+    // ...
+
+    // Return true if an inside candle pattern is found, otherwise false
+    return false;
+}
+
+//+------------------------------------------------------------------+
+//| Get the breakout direction                                       |
+//+------------------------------------------------------------------+
+ENUM_DIRECTION GetBreakoutDirection()
+{
+    // Implementation to determine the breakout direction
+    // ...
+
+    // Return the breakout direction
+    return DIRECTION_NONE;
+}
+
+//+------------------------------------------------------------------+
+//| Place a buy order                                                |
+//+------------------------------------------------------------------+
+void BuyOrder()
+{
+    // Implementation to place a buy order
+    // ...
+
+    // Display a message indicating the buy order has been placed
+    Print('Buy order placed.');
+}
+
+//+------------------------------------------------------------------+
+//| Place a sell order                                               |
+//+------------------------------------------------------------------+
+void SellOrder()
+{
+    // Implementation to place a sell order
+    // ...
+
+    // Display a message indicating the sell order has been placed
+    Print('Sell order placed.');
+}
